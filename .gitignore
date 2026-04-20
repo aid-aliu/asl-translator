@@ -1,0 +1,25 @@
+# Virtual environment
+venv/
+
+# Dataset (too large for GitHub)
+data/asl_alphabet_train/
+data/asl_alphabet_test/
+data/landmarks.csv
+data/landmarks_test.csv
+data/hand_landmarker.task
+
+# Trained model (too large)
+models/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+
+# IDE files
+.idea/
+.vscode/
+*.iml

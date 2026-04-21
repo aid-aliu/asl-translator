@@ -1,21 +1,12 @@
-# Virtual environment
+# Virtual environments
 venv/
-
-# Dataset (too large for GitHub)
-data/asl_alphabet_train/
-data/asl_alphabet_test/
-data/landmarks.csv
-data/landmarks_test.csv
-data/hand_landmarker.task
-data/Test_Alphabet
-data/Train_Alphabet
-# Trained model (too large)
-models/
+.venv/
 
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
 # Environment variables
 .env
@@ -24,3 +15,43 @@ __pycache__/
 .idea/
 .vscode/
 *.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Datasets / large data
+data/asl_alphabet_train/
+data/asl_alphabet_test/
+data/landmarks.csv
+data/landmarks_test.csv
+data/landmarks_train_orig.csv
+data/landmarks_train_synthetic.csv
+data/landmarks_test_orig.csv
+data/landmarks_test_synthetic.csv
+data/hand_landmarker.task
+data/Test_Alphabet/
+data/Train_Alphabet/
+
+# Trained models / generated artifacts
+models/
+
+# Frontend dependencies / build output
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+
+# Frontend env files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

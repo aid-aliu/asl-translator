@@ -7,7 +7,8 @@ data/asl_alphabet_test/
 data/landmarks.csv
 data/landmarks_test.csv
 data/hand_landmarker.task
-
+data/Test_Alphabet
+data/Train_Alphabet
 # Trained model (too large)
 models/
 

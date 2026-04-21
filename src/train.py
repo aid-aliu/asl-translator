@@ -7,34 +7,45 @@ import matplotlib.pyplot as plt
 import pickle
 import os
 
-print("📂 Loading training landmarks...")
-df = pd.read_csv("../data/landmarks.csv")
-X = df.drop("label", axis=1).values
-y = df["label"].values
-print(f"✅ Loaded {len(X)} samples across {len(set(y))} classes")
+print("📂 Loading landmarks...")
 
-# Proper 80/20 split
+# Use only original train data — synthetic train was empty
+df = pd.read_csv("../data/landmarks_train_orig.csv")
+
+# Drop "nothing" — only 1 sample, useless
+df = df[df["label"] != "nothing"]
+
+print(f"✅ Loaded {len(df)} samples across {len(df['label'].unique())} classes")
+
+# 80/20 split
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    df.drop("label", axis=1).values,
+    df["label"].values,
+    test_size=0.2,
+    random_state=42
 )
-print(f"🏋️ Training on {len(X_train)}, testing on {len(X_test)}...")
 
+print(f"✅ Training: {len(X_train)} | Test: {len(X_test)}")
+
+# Train
+print("\n🏋️ Training Random Forest...")
 model = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
 model.fit(X_train, y_train)
 
+# Evaluate
+print("📊 Evaluating...")
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"\n✅ Accuracy: {accuracy * 100:.2f}%")
 print(classification_report(y_test, y_pred))
 
-
+# Save
 os.makedirs("../models", exist_ok=True)
 with open("../models/asl_model.pkl", "wb") as f:
     pickle.dump(model, f)
+print("✅ Model saved to ../models/asl_model.pkl")
 
 ConfusionMatrixDisplay.from_predictions(y_test, y_pred, xticks_rotation=45)
 plt.tight_layout()
 plt.savefig("../models/confusion_matrix.png")
 print("✅ Confusion matrix saved")
-
-print("\n✅ Model saved to ../models/asl_model.pkl")
